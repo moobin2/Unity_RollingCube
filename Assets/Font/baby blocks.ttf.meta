@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: b33b57c331296b34083ac338eae15d56
+timeCreated: 1495762356
+licenseType: Free
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Baby blocks
+  fontNames:
+  - Baby blocks
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
