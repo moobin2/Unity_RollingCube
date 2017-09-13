@@ -23,6 +23,7 @@ public class Manager_GameController : MonoBehaviour
     public GameObject ui;
     public GameObject player;
     public GameObject map;
+    public bool isPlayerTNT;
 
     public int CurrentStageNumber;
     private bool _isReseting = false;
@@ -68,6 +69,11 @@ public class Manager_GameController : MonoBehaviour
     public void StageClear()
     {
         Debug.Log("스테이지클리어");
+
+        UI_Controller uiController = ui.GetComponent<UI_Controller>();
+
+        uiController.CalculateScore();
+
         ui.transform.GetChild(4).gameObject.SetActive(true);
     }
 
@@ -75,7 +81,7 @@ public class Manager_GameController : MonoBehaviour
     {
         if (_isReseting == true) return;
         //ui.SetActive(false);
-        player.GetComponent<PlayCubeController>().ResetCube();
+        player.GetComponent<Player_Controller>().ResetCube();
         Debug.Log("스페이지실패");
 
         StartCoroutine("SettingStage");

@@ -14,9 +14,25 @@ public class UI_Time : MonoBehaviour {
     }
 	
 	// Update is called once per frame
-	void Update () {
-		
-	}
+	void Update ()
+    {
+    }
+
+    public int TimeToZero()
+    {
+        Debug.Log("여기 불려짐");
+        StopCoroutine("DecreaseSecond");
+        iTween.ValueTo(this.gameObject, iTween.Hash("from", _time, "to", 0, "onUpdate", "SetTimeText", "time", 1));
+
+        Debug.Log(_time);
+
+        return _time;
+    }
+
+    void SetTimeText(int time)
+    {
+        _label.text = time.ToString();
+    }
 
     IEnumerator DecreaseSecond()
     {

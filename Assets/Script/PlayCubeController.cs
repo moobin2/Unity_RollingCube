@@ -2,15 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum CUBESATE
-{
-    HORIZON_X, HORIZON_Z, VERTICAL
-}
+//public enum CUBESATE
+//{
+//    HORIZON_X, HORIZON_Z, VERTICAL
+//}
 
-public enum DIRECTION
-{
-    UP, DOWN, RIGHT, LEFT
-}
+//public enum DIRECTION
+//{
+//    UP, DOWN, RIGHT, LEFT
+//}
 
 [RequireComponent(typeof(Rigidbody))]
 public class PlayCubeController : MonoBehaviour
