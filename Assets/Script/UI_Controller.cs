@@ -18,17 +18,6 @@ public class UI_Controller : MonoBehaviour
         _uiPoint = PointUIObject.GetComponent<UI_Point>();
         _uiMoveCount = MoveUIObject.GetComponent<UI_Movecount>();
     }
-    // Use this for initialization
-    void Start ()
-    {
-		
-	}
-	
-	// Update is called once per frame
-	void Update ()
-    {
-		
-	}
 
     public void CalculateScore()
     {
@@ -36,5 +25,10 @@ public class UI_Controller : MonoBehaviour
         _uiPoint.IncreaseScore(leftTime);
 
         //this.gameObject.transform.GetChild(4).gameObject.SetActive(true);
+    }
+
+    public void TimePenalty(int PenaltyTime)
+    {
+        _uiTime.SubSecond(PenaltyTime);
     }
 }

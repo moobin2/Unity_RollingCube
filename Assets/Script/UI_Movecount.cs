@@ -10,7 +10,19 @@ public class UI_Movecount : MonoBehaviour
     void Awake ()
     {
         _label = GetComponent<UILabel>();
-	}
+        if (Manager_GameController.Instance.isPlayerTNT == true)
+        {
+            _label.text = Manager_GameController.Instance.movableCount.ToString();
+        }
+    }
+
+    //private void Start()
+    //{
+    //    if (Manager_GameController.Instance.isPlayerTNT == true)
+    //    {
+    //        _label.text = Manager_GameController.Instance.movableCount.ToString();
+    //    }
+    //}
 
     public void SetMoveCount(int moveCount)
     {

@@ -12,6 +12,13 @@ public class Scene_ChangeScene : MonoBehaviour
         SceneManager.LoadScene(StageSceneName);
     }
 
+    public void RestartStage()
+    {
+        int nextStage = Manager_GameController.Instance.CurrentStageNumber;
+        string StageSceneName = "Stage_" + nextStage;
+        SceneManager.LoadScene(StageSceneName);
+    }
+
     public void ChangeToStage1()
     {
         SceneManager.LoadScene("Stage_1");

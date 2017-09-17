@@ -24,11 +24,13 @@ public class Manager_GameController : MonoBehaviour
     public GameObject player;
     public GameObject map;
     public bool isPlayerTNT;
+    public int movableCount;
 
     public int CurrentStageNumber;
     private bool _isReseting = false;
     private List<Block_StartMove>   _blockStartList;
     private List<Block_Switch>      _blockSwitchList;
+    private List<Block_Broken>      _blockBrokenList;
 
 	// Use this for initialization
 	void Awake ()
@@ -40,6 +42,7 @@ public class Manager_GameController : MonoBehaviour
         int mapChildSize = map.transform.childCount;
         _blockStartList = new List<Block_StartMove>();
         _blockSwitchList = new List<Block_Switch>();
+        _blockBrokenList = new List<Block_Broken>();
 
         for (int i = 0; i < mapChildSize; i++)
         {
@@ -53,6 +56,11 @@ public class Manager_GameController : MonoBehaviour
             {
                 _blockStartList.Add(tempBlock.GetComponent<Block_StartMove>());
                 _blockSwitchList.Add( tempBlock.GetComponent<Block_Switch>() );
+            }
+            else if(tempBlock.tag == "Broken")
+            {
+                _blockStartList.Add(tempBlock.GetComponent<Block_StartMove>());
+                _blockBrokenList.Add(tempBlock.GetComponent<Block_Broken>());
             }
             else
             {
@@ -68,21 +76,36 @@ public class Manager_GameController : MonoBehaviour
 
     public void StageClear()
     {
-        Debug.Log("스테이지클리어");
+        Debug.Log("Stage Clear");
 
         UI_Controller uiController = ui.GetComponent<UI_Controller>();
 
         uiController.CalculateScore();
 
         ui.transform.GetChild(4).gameObject.SetActive(true);
+        movable = false;
     }
 
-    public void StateFail()
+    public void StageFail()
+    {
+        Debug.Log("Stage Fail");
+
+        UI_Controller uiController = ui.GetComponent<UI_Controller>();
+
+        ui.transform.GetChild(5).gameObject.SetActive(true);
+
+        movable = false;
+    }
+
+    public void StageReset()
     {
         if (_isReseting == true) return;
-        //ui.SetActive(false);
+        Debug.Log("Stage Reset");
+
+        UI_Controller uiController = ui.GetComponent<UI_Controller>();
+        uiController.TimePenalty(10);
+
         player.GetComponent<Player_Controller>().ResetCube();
-        Debug.Log("스페이지실패");
 
         StartCoroutine("SettingStage");
     }
@@ -98,6 +121,11 @@ public class Manager_GameController : MonoBehaviour
         foreach(Block_Switch switchs in _blockSwitchList)
         {
             switchs.Setting();
+        }
+
+        foreach(Block_Broken brokens in _blockBrokenList)
+        {
+            brokens.Setting();
         }
 
         yield return new WaitForSeconds(startTime);

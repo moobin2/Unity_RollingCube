@@ -77,15 +77,4 @@ public class Block_Switch : MonoBehaviour
 
         this.gameObject.GetComponent<MeshRenderer>().material = SwitchOffMaterial;
     }
-
-    // Use this for initialization
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
-    void Update () {
-		
-	}
 }

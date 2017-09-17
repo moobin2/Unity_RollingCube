@@ -212,7 +212,15 @@ public class Player_Controller : MonoBehaviour
     IEnumerator TurningCube(DIRECTION dir)
     {
         _moveCount++;
-        _moveCountText.SetMoveCount(_moveCount);
+
+        if (Manager_GameController.Instance.isPlayerTNT == false)
+        {
+            _moveCountText.SetMoveCount(_moveCount);
+        }
+        else
+        {
+            _moveCountText.SetMoveCount(Manager_GameController.Instance.movableCount - _moveCount);
+        }
 
         _isTurning = true;
         SetGravity(false);
@@ -235,6 +243,11 @@ public class Player_Controller : MonoBehaviour
         SetState(dir);
         _isTurning = false;
         SetGravity(true);
+
+        if (Manager_GameController.Instance.movableCount - _moveCount == 0)
+        {
+            Manager_GameController.Instance.StageFail();
+        }
     }
 
     public void ResetCube()
@@ -242,13 +255,16 @@ public class Player_Controller : MonoBehaviour
         StopCoroutine("TurningCube");
         this.transform.position = _firstPos;
         this.transform.rotation = _currentRot = Quaternion.identity;
-        //_rigid.velocity = Vector3.zero;
-        //_rigid.WakeUp();
+
         _rigid.velocity = Vector3.zero;
-
         _rigid.angularVelocity = Vector3.zero;
-
         _rigid.Sleep();
+
+        if(Manager_GameController.Instance.isPlayerTNT == true)
+        {
+            _moveCount = 0;
+            _moveCountText.SetMoveCount(Manager_GameController.Instance.movableCount - _moveCount);
+        }
 
         _state = CUBESATE.VERTICAL;
         _isTurning = false;

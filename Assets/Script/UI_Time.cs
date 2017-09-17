@@ -12,15 +12,10 @@ public class UI_Time : MonoBehaviour {
         _label = GetComponent<UILabel>();
         StartCoroutine("DecreaseSecond");
     }
-	
-	// Update is called once per frame
-	void Update ()
-    {
-    }
 
     public int TimeToZero()
     {
-        Debug.Log("여기 불려짐");
+        Debug.Log("Time To Zero Funtion Call");
         StopCoroutine("DecreaseSecond");
         iTween.ValueTo(this.gameObject, iTween.Hash("from", _time, "to", 0, "onUpdate", "SetTimeText", "time", 1));
 
@@ -34,21 +29,33 @@ public class UI_Time : MonoBehaviour {
         _label.text = time.ToString();
     }
 
+    public void SubSecond(int time)
+    {
+        _time -= time;
+        if(_time < 0)
+        {
+            _time = 0;
+            StopCoroutine("DecreaseSecond");
+            Manager_GameController.Instance.StageFail();
+        }
+        SetTimeText(_time);
+    }
+
     IEnumerator DecreaseSecond()
     {
         yield return new WaitForSeconds(1.0f);
 
+        SetTimeText(_time);
+
         _time--;
 
-        _label.text = _time.ToString();
-
-        if (_time > 0)
+        if (_time >= 0)
         {
             StartCoroutine("DecreaseSecond");
         }
         else
         {
-
+            Manager_GameController.Instance.StageFail();
         }
     }
 }
