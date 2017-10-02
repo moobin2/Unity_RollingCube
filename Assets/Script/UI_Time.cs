@@ -41,6 +41,11 @@ public class UI_Time : MonoBehaviour {
         SetTimeText(_time);
     }
 
+    public void StopDeacreseTime()
+    {
+        StopCoroutine("DecreaseSecond");
+    }
+
     IEnumerator DecreaseSecond()
     {
         yield return new WaitForSeconds(1.0f);

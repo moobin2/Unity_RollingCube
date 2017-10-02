@@ -108,8 +108,6 @@ public class Player_Controller : MonoBehaviour
                     break;
                 }
         }
-
-        //ResiseColliderbox();
     }
 
     void SetPivot(DIRECTION dir)
@@ -204,8 +202,6 @@ public class Player_Controller : MonoBehaviour
                 _currentRot.z -= 90;
                 break;
         }
-
-        //this.transform.position = _currentPos;
         this.transform.rotation = _currentRot;
     }
 

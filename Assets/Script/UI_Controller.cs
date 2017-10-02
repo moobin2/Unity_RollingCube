@@ -31,4 +31,9 @@ public class UI_Controller : MonoBehaviour
     {
         _uiTime.SubSecond(PenaltyTime);
     }
+
+    public void UIStop()
+    {
+        _uiTime.StopDeacreseTime();
+    }
 }

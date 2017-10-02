@@ -24,6 +24,19 @@ public class Scene_ChangeScene : MonoBehaviour
         SceneManager.LoadScene("Stage_1");
     }
 
+    public void ChageToBestStage()
+    {
+        if(PlayerPrefs.HasKey("BestStage"))
+        {
+            string StageSceneName = "Stage_" + PlayerPrefs.GetInt("BestStage");
+            SceneManager.LoadScene(StageSceneName);
+        }
+        else
+        {
+            SceneManager.LoadScene("Stage_1");
+        }
+    }
+
     public void ChangeToTitleScene()
     {
         SceneManager.LoadScene("Title");

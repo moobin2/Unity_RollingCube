@@ -84,6 +84,11 @@ public class Manager_GameController : MonoBehaviour
 
         ui.transform.GetChild(4).gameObject.SetActive(true);
         movable = false;
+
+        if(PlayerPrefs.GetInt("BestStage") < CurrentStageNumber + 1)
+        {
+            PlayerPrefs.SetInt("BestStage", CurrentStageNumber + 1);
+        }
     }
 
     public void StageFail()
@@ -91,6 +96,7 @@ public class Manager_GameController : MonoBehaviour
         Debug.Log("Stage Fail");
 
         UI_Controller uiController = ui.GetComponent<UI_Controller>();
+        uiController.UIStop();
 
         ui.transform.GetChild(5).gameObject.SetActive(true);
 
